@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <form method="get">
+            <select id="id_sort_type" name="sort_type" class="browser-default">
+                <option value="az">A to Z</option>
+                <option value="za">Z to A</option>
+            </select>
+            <button class="btn waves-effect waves-light" type="submit" }>
+                Submit
+            </button>
+        </form>
+
+        <div class="row">
+            {% for masterpiece in masterpieces_sorted %}
+                <div class="col s4">
+                    <div class="card">
+                        <div class="card-image">
+                            <a href="{{ masterpiece.get_absolute_url }}">
+                                <img src="{{ masterpiece.image.url }}" alt="{{ masterpiece.masterpiece_name }}">
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <p>{{ masterpiece.masterpiece_name }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

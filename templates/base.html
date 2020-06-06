@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Paynting</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<nav>
+    <div class="container nav-wrapper">
+        <a href="/" class="brand-logo">Paynting</a>
+        <ul id="nav-mobile" class="right">
+            <li>
+                <a href="/account/{{ user.username }}">
+                    {% block logout %}
+                        {% if user.is_authenticated %}
+                            Hi, {{ user.username }}!
+                        {% else %}
+                            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                                <li><a href="{% url 'login' %}">Log in</a></li>
+                                <li><a href="{% url 'signup' %}">Sign up</a></li>
+                            </ul>
+                        {% endif %}
+                    {% endblock %}
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+{% block masterpiece_detail %}
+    {% block content %}
+        <div class="container">
+            <h1 style="text-align: left">Discover the world’s top designers & creatives</h1>
+            <div class="row">
+                <div class="col s4">
+                    <div class="center">
+                        <i class="large material-icons" style="color: #B0D0D3">flash_on</i>
+                        <p>Fast</p>
+                        <p class="light center">With a beautiful GUI.</p>
+                    </div>
+                </div>
+
+                <div class="col s4">
+                    <div class="center">
+                        <i class="large material-icons" style="color: #F7E3AF">explore</i>
+                        <p>Masterpieces from all around the world</p>
+                        <p class="light center">Best of the best</p>
+                    </div>
+                </div>
+
+                <div class="col s4">
+                    <div class="center">
+                        <i class="large material-icons" style="color: #F7AF9D">whatshot</i>
+                        <p>Alternative for Dribbble</p>
+                        <p class="light center">Built with ❤️ (actually with 🤬)</p>
+                    </div>
+                </div>
+            </div>
+
+            <form action="{% url 'search' %}" method="get">
+                <input name="q" type="text" placeholder="What are you looking for?">
+            </form>
+
+            <div style="text-align: center">
+                <a href="/sort">
+                    <button class="btn waves-effect waves-light" type="submit" name='register_btn' }>
+                        I WANT TO SORT ALL OF THIS
+                    </button>
+                </a>
+            </div>
+
+            <div class="row">
+                {% for masterpiece in masterpiece_list %}
+                    <div class="col s4">
+                        <div class="card">
+                            <div class="card-image">
+                                <a href="{{ masterpiece.get_absolute_url }}">
+                                    <img src="{{ masterpiece.image.url }}" alt="{{ masterpiece.masterpiece_name }}">
+                                </a>
+                            </div>
+                            <div class="card-content">
+                                <p>{{ masterpiece.masterpiece_name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endblock %}
+
+    {% if user.is_authenticated %}
+        <div class="fixed-action-btn">
+            <a href="/masterpiece/create" class="btn-floating btn-large red">
+                <i class="large material-icons">add</i>
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+</html>

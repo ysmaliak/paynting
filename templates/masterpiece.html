@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block masterpiece_detail %}
+
+    <div class="container" style="text-align: center">
+        <h2>{{ masterpiece.masterpiece_name }}</h2>
+    </div>
+
+    <div class="container">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <div id="image">
+            <img src="{{ masterpiece.image.url }}" alt="{{ masterpiece.image }}" width="500">
+        </div>
+
+        <div id="text">
+            <p><b>By:</b> {{ masterpiece.uploaded_by }}</p>
+            <p><b>Description:</b> {{ masterpiece.description }}</p>
+            {% if masterpiece.made_with != None %}
+                <p><b>Hardware that were used:</b> {{ masterpiece.made_with.hardware }}</p>
+                <p><b>Software that were used:</b> {{ masterpiece.made_with.software }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        {% if masterpiece.uploaded_by == user %}
+            <div class="fixed-action-btn">
+                <a href="/masterpiece/{{ masterpiece.id }}/update/" class="btn-floating btn-large red">
+                    <i class="large material-icons">edit</i>
+                </a>
+            </div>
+            <div id="delete_button">
+                <div class="fixed-action-btn" style="right: 96px;">
+                    <a href="/masterpiece/{{ masterpiece.id }}/delete/" class="btn-floating btn-large red">
+                        <i class="large material-icons">delete</i>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block logout %}
+    <a href="{% url 'logout' %}">Log out</a>
+{% endblock %}
+
+{% block content %}
+    {% if not user.is_authenticated %}
+        <div class="container">
+            <h2>Log in</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="card-content white-text">
+                    <span class="card-title">You can log in</span>
+                    {{ form.as_p }}
+                </div>
+
+                <div class="card-action" style="text-align:center">
+                    <button class="btn waves-effect waves-light" type="submit" name='login_btn' }>
+                        Log in
+                    </button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+nav {
+    background-color:#BE95C4;
+}
+
+#image {
+    display: inline-block;
+}
+
+#text {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#delete_button {
+    position: absolute;
+    left: 100px;
+    top: 150px;
+}

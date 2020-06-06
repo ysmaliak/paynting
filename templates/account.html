@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% if not user.is_authenticated %}
+    <meta http-equiv="refresh" content="0; url = /"/>
+{% endif %}
+
+{% block content %}
+
+    <div class="container">
+        <h2>About {{ user.username }}</h2>
+        <p>Email: {{ user.email }}</p>
+        <p>First name: {{ user.first_name }}</p>
+        <p>Last name: {{ user.last_name }}</p>
+
+        <hr>
+        <h3>Masterpieces by {{ user.username }}</h3>
+        <div class="row">
+            {% for masterpiece in masterpiece_list %}
+                {% if masterpiece.uploaded_by == user %}
+                    <div class="col s4">
+                        <div class="card">
+                            <div class="card-image">
+                                <a href="{{ masterpiece.get_absolute_url }}">
+                                    <img src="{{ masterpiece.image.url }}" alt="{{ masterpiece.masterpiece_name }}">
+                                </a>
+                            </div>
+                            <div class="card-content">
+                                <p>{{ masterpiece.masterpiece_name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block logout %}
+
+    <a href="{% url 'logout' %}">Log out</a>
+
+{% endblock %}

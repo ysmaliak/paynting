@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            {% for masterpiece in masterpiece_list %}
+                <div class="col s4">
+                    <div class="card">
+                        <div class="card-image">
+                            <a href="{{ masterpiece.get_absolute_url }}">
+                                <img src="{{ masterpiece.image.url }}" alt="{{ masterpiece.masterpiece_name }}">
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <p>{{ masterpiece.masterpiece_name }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

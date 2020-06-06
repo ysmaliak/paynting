@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container">
+        {% if masterpiece.uploaded_by == user %}
+            <h2>Are you sure you want to delete the masterpiece: {{ masterpiece }}?</h2>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div style="text-align: center">
+                    <button class="btn waves-effect waves-light" type="submit" }>Yes, delete.</button>
+                </div>
+            </form>
+        {% else %}
+            <h2>Sorry, you can't do it</h2>
+        {% endif %}
+    </div>
+
+{% endblock %}
