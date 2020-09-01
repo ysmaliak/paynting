@@ -3,12 +3,15 @@
 ## Description
 This is an alternative for [Dribbble.com](https://dribbble.com)  
 You can signup and upload your masterpieces to show them to world  
+![alt text](screenshots/main_page.png)  
+![alt text](screenshots/masterpiece_detail_page.png)  
+![alt text](screenshots/sign_up_page.png)  
 
 ### Models
 There are 5 models: Masterpiece, MadeWith, Search, Sort and Profile  
 All models in /admin  
-![alt text](admin_page.png)  
-![alt text](admin_change_masterpiece_page.png)  
+![alt text](screenshots/admin_page.png)  
+![alt text](screenshots/admin_change_masterpiece_page.png)  
 
 
 ### CRUD
